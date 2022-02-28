@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  nats-server:
+    container_name: nats-server
+    build:
+      context: ./dockerfiles
+      dockerfile: nats.dockerfile
+      args:
+        - NATS_VERSION=${NATS_VERSION:-alpine}
+    ports:
+      - 1883:1883
+      - 4222:4222
+
+   # Eclipse Mosquitto MQTT Broker
+  mosquitto:
+    container_name: mosquitto
+    build:
+      context: ./dockerfiles
+      dockerfile: mqtt.dockerfile
+      args:
+        - MOSQUITTO_VERSION=${MOSQUITTO_VERSION:-latest}
+    environment:
+      - MOSQUITTO_USERNAME=${MOSQUITTO_USERNAME}
+      - MOSQUITTO_PASSWORD=${MOSQUITTO_PASSWORD}
+    restart: always
+    volumes:
+      - ./scripts:/scripts
+    ports:
+      - 1884:1883
+
+  nats-box:
+    container_name: nats-box
+    image: synadia/nats-box:latest
+    stdin_open: true
+    tty: true
+
+networks:
+  default:
+    name: nats_mqtt_network
+    driver: bridge
