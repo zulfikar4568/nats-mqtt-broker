@@ -15,7 +15,7 @@ printf "${PURPLE}"
 echo "Stopping docker engine..."
 printf "${NC}"
 
-docker-compose down
+docker-compose stop
 
 echo ""
 
