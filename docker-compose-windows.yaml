@@ -5,7 +5,7 @@ services:
       context: ./dockerfiles
       dockerfile: nats.dockerfile
       args:
-        - NATS_VERSION=${NATS_VERSION:-alpine}
+        - NATS_VERSION=alpine
     ports:
       - 1883:1883
       - 4222:4222
@@ -17,10 +17,10 @@ services:
       context: ./dockerfiles
       dockerfile: mqtt.dockerfile
       args:
-        - MOSQUITTO_VERSION=${MOSQUITTO_VERSION:-latest}
+        - MOSQUITTO_VERSION=latest
     environment:
-      - MOSQUITTO_USERNAME=${MOSQUITTO_USERNAME}
-      - MOSQUITTO_PASSWORD=${MOSQUITTO_PASSWORD}
+      - MOSQUITTO_USERNAME=mosquitto
+      - MOSQUITTO_PASSWORD=mosquitto
     restart: always
     volumes:
       - ./scripts:/scripts

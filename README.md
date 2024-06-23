@@ -1,6 +1,18 @@
 # NATS MQTT BROKER
 © M. Zulfikar Isnaen, This is Under [MIT License](LICENSE).
 
+# 1. Running on Windows
+## Run the Service
+Open the CMD or Powershell. Check the version of docker-compose and make sure installed
+```bash
+docker-compose --version
+```
+Run the docker-compose script
+```bash
+docker-compose -f docker-compose-windows.yml up --build -d
+```
+
+# 2. Running on Linux or Mac
 ## Running All Container
 ```bash
 ./up.sh
